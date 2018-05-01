@@ -7,7 +7,7 @@ import { getDeckMetaInfo } from './utils/helpers';
 import { purple, white, red } from './utils/colors'
 import { Constants } from 'expo'
 
-function UdaciStatusBar ({backgroundColor, ...props}) {
+function HeaderStatusBar ({backgroundColor, ...props}) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
       <StatusBar translucent backgroundColor={backgroundColor} {...props} />
@@ -25,7 +25,8 @@ class App extends React.Component {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <UdaciStatusBar backgroundColor={red} barStyle="light-content" />
+          <HeaderStatusBar backgroundColor={red} barStyle="light-content" />
+          {/* aqui vem a primeira tela */}
         </View>
       </Provider>
     );
