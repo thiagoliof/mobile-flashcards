@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { getPackMetaInfo } from './utils/helpers';
+import { getDeckMetaInfo } from './utils/helpers';
 
 export default class App extends React.Component {
   render() {
-    const metaInfo = getPackMetaInfo()
+    const metaInfo = getDeckMetaInfo()
     const data = Object.keys(metaInfo).map((key) => {
       return {key: key}
     })

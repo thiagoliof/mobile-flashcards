@@ -1,4 +1,4 @@
-export function getPackMetaInfo (pack) {
+export function getDeckMetaInfo (pack) {
     const info = {
       baralho1: {
         displayName: 'Run1',
@@ -7,6 +7,18 @@ export function getPackMetaInfo (pack) {
         displayName: 'Run2',
       },
       baralho3: {
+        displayName: 'Run3',
+      },
+      baralho4: {
+        displayName: 'Run3',
+      },
+      baralho5: {
+        displayName: 'Run3',
+      },
+      baralho6: {
+        displayName: 'Run3',
+      },
+      baralho7: {
         displayName: 'Run3',
       },
     }
