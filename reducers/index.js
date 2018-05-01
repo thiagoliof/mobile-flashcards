@@ -1,8 +1,32 @@
-import { RECEIVE_ENTRIES, ADD_DECK } from '../actions'
+import { RECEIVE_DECKS, ADD_DECK } from '../actions'
 
-function decks (state = {}, action) {
+const _decks = [
+    {
+      displayName: 'Run1',
+    },
+    {
+      displayName: 'Run2',
+    },
+    {
+      displayName: 'Run3',
+    },
+    {
+      displayName: 'Run3',
+    },
+    {
+      displayName: 'Run3',
+    },
+    {
+      displayName: 'Run3',
+    },
+    {
+      displayName: 'Run3',
+    },
+]
+
+function decks (state = _decks, action) {
   switch (action.type) {
-    case RECEIVE_ENTRIES :
+    case RECEIVE_DECKS :
       return {
         ...state,
         ...action.decks,
@@ -17,4 +41,5 @@ function decks (state = {}, action) {
   }
 }
 
-export default entries 
+
+export default decks 

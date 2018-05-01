@@ -1,23 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import reducer from './reducers'
+import { StyleSheet, Text, View, FlatList, StatusBar } from 'react-native';
 import { getDeckMetaInfo } from './utils/helpers';
+import { purple, white, red } from './utils/colors'
+import { Constants } from 'expo'
 
-export default class App extends React.Component {
+function UdaciStatusBar ({backgroundColor, ...props}) {
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
+
+
+class App extends React.Component {
   render() {
     const metaInfo = getDeckMetaInfo()
     const data = Object.keys(metaInfo).map((key) => {
       return {key: key}
     })
     return (
-      <View style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-        />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <UdaciStatusBar backgroundColor={red} barStyle="light-content" />
+        </View>
+      </Provider>
     );
   }
 }
+
+export default App
 
 const styles = StyleSheet.create({
   container: {
