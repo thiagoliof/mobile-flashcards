@@ -7,7 +7,7 @@ import { red } from './utils/colors'
 import { Constants } from 'expo'
 import { TabNavigator  } from 'react-navigation';
 
-import  ListItem  from './components/ListItem'
+import  Decks  from './components/Decks'
 
 
 function HeaderStatusBar ({backgroundColor, ...props}) {
@@ -24,7 +24,7 @@ class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
           <HeaderStatusBar backgroundColor={red} barStyle="light-content" />
-          <ListItem />
+          <Decks></Decks>
         </View>
       </Provider>
     );

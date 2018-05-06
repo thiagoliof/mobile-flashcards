@@ -3,15 +3,12 @@ import { Text, View, FlatList} from 'react-native';
 import { getDeckMetaInfo } from '../utils/helpers';
 
 
-class ListItem extends React.Component {
+class Decks extends React.Component {
   render() {
     const metaInfo = getDeckMetaInfo()
     const data = Object.keys(metaInfo).map((key) => {
       return {key: key, total: getDeckMetaInfo(key).questions ? getDeckMetaInfo(key).questions.length: 0}
     })
-
-    console.log(data)
-
     return (
       <View>
           <FlatList
@@ -23,5 +20,5 @@ class ListItem extends React.Component {
   }
 }
 
-export default ListItem
+export default Decks
 
