@@ -1,26 +1,31 @@
 export function getDeckMetaInfo (pack) {
     const info = {
-      baralho1: {
-        displayName: 'Run1',
+      React: {
+        title: 'React',
+        questions: [
+          {
+            question: 'What is React?',
+            answer: 'A library for managing user interfaces'
+          },
+          {
+            question: 'Where do you make Ajax requests in React?',
+            answer: 'The componentDidMount lifecycle event'
+          }
+        ]
       },
-      baralho2: {
-        displayName: 'Run2',
+      JavaScript: {
+        title: 'JavaScript',
+        questions: [
+          {
+            question: 'What is a closure?',
+            answer: 'The combination of a function and the lexical environment within which that function was declared.'
+          }
+        ]
       },
-      baralho3: {
-        displayName: 'Run3',
+      JavaScript2: {
+        title: 'JavaScript2',
       },
-      baralho4: {
-        displayName: 'Run3',
-      },
-      baralho5: {
-        displayName: 'Run3',
-      },
-      baralho6: {
-        displayName: 'Run3',
-      },
-      baralho7: {
-        displayName: 'Run3',
-      },
+      
     }
   
     return typeof pack === 'undefined'
