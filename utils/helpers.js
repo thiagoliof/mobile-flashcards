@@ -24,6 +24,12 @@ export function getDeckMetaInfo (pack) {
       },
       JavaScript2: {
         title: 'JavaScript2',
+        questions: [
+          {
+            question: 'What is a closure?',
+            answer: 'The combination of a function and the lexical environment within which that function was declared.'
+          }
+        ]
       },
       
     }
