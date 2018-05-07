@@ -38,3 +38,7 @@ export function getDeckMetaInfo (deck) {
       ? info
       : info[deck]
   }
+
+  export function itemDetails(metaInfo, key){
+    return metaInfo[key]
+  }
