@@ -27,12 +27,6 @@ class Decks extends React.Component {
 
     return (
       <View>
-          {/* <Text>{ this.state.result }</Text> */}
-          {/* <TextInput
-            multiline={true}
-            numberOfLines={4}
-            
-            value={this.state.result}/> */}
           <FlatList
             data={data}
             renderItem={({item}) => <Text>{item.key}, total:{item.total}</Text>}
