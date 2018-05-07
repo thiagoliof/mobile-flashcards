@@ -1,4 +1,4 @@
-export function getDeckMetaInfo (pack) {
+export function getDeckMetaInfo (deck) {
     const info = {
       React: {
         title: 'React',
@@ -34,7 +34,11 @@ export function getDeckMetaInfo (pack) {
       
     }
   
-    return typeof pack === 'undefined'
+    return typeof deck === 'undefined'
       ? info
-      : info[pack]
+      : info[deck]
+  }
+
+  export function itemDetails(metaInfo, key){
+    return metaInfo[key]
   }

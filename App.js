@@ -2,12 +2,13 @@ import React from 'react';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
-import { Text, View, FlatList, StatusBar, Platform } from 'react-native';
+import { Text, View, FlatList, StatusBar, Platform, Button } from 'react-native';
 import { red } from './utils/colors'
 import { Constants } from 'expo'
-import { TabNavigator  } from 'react-navigation';
+import { StackNavigator  } from 'react-navigation';
 
 import  Decks  from './components/Decks'
+import  AddDeck  from './components/AddDeck'
 
 
 function HeaderStatusBar ({backgroundColor, ...props}) {
@@ -17,6 +18,47 @@ function HeaderStatusBar ({backgroundColor, ...props}) {
     </View>
   )
 }
+
+// function Dash(){
+//   return(
+//     <View>
+//       <Text>Dash</Text>
+//     </View>
+//   )
+// }
+
+
+const Stack = StackNavigator({
+  Home: {
+    screen: Decks,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Decks',
+      headerTintColor: 'red', 
+      headerStyle:{
+        backgroundColor: 'black'
+      },
+      headerRight: (
+        <Button
+          onPress={() => { navigation.navigate('AddDeck'); }}
+          title="Add Baralhos"
+          color="#fff"
+        />
+      ),
+    })
+  },
+  AddDeck:{
+    screen: AddDeck,
+    navigationOptions: ({ navigation }) => ({
+      title : 'add deck',
+    })
+  },
+  // Dash:{
+  //   screen: Dash,
+  // }
+})
+
+
+
 class App extends React.Component {
   render() {
    
@@ -24,7 +66,7 @@ class App extends React.Component {
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
           <HeaderStatusBar backgroundColor={red} barStyle="light-content" />
-          <Decks></Decks>
+          <Stack></Stack>
         </View>
       </Provider>
     );
