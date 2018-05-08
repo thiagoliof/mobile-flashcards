@@ -3,12 +3,13 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import reducer from './reducers'
 import { Text, View, FlatList, StatusBar, Platform, Button } from 'react-native';
-import { red } from './utils/colors'
+import { red, gray } from './utils/colors'
 import { Constants } from 'expo'
 import { StackNavigator  } from 'react-navigation';
 
 import  Decks  from './components/Decks'
 import  AddDeck  from './components/AddDeck'
+import  DeckDetail  from './components/DeckDetail'
 
 
 function HeaderStatusBar ({backgroundColor, ...props}) {
@@ -40,7 +41,7 @@ const Stack = StackNavigator({
       headerRight: (
         <Button
           onPress={() => { navigation.navigate('AddDeck'); }}
-          title="Add Baralhos"
+          title="Add"
           color="#fff"
         />
       ),
@@ -50,22 +51,22 @@ const Stack = StackNavigator({
     screen: AddDeck,
     navigationOptions: ({ navigation }) => ({
       title : 'add deck',
+      headerStyle:{
+        backgroundColor: 'black'
+      },
     })
   },
-  // Dash:{
-  //   screen: Dash,
-  // }
+  DeckDetail:{
+    screen: DeckDetail,
+  }
 })
 
-
-
 class App extends React.Component {
-  render() {
-   
+  render() { 
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <HeaderStatusBar backgroundColor={red} barStyle="light-content" />
+          <HeaderStatusBar backgroundColor={gray} barStyle="light-content" />
           <Stack></Stack>
         </View>
       </Provider>

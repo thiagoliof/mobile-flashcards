@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationActions } from 'react-navigation';
 import { Text, View, TextInput, Button, StyleSheet} from 'react-native';
-import  {saveDeckTitle, setDecksData, getDecks, removeDeck}  from '../utils/api';
+import  { saveDeckTitle }  from '../utils/api';
 
 
 
@@ -12,21 +12,16 @@ const resetAction = NavigationActions.reset({
         NavigationActions.navigate({routeName: 'Home'})
     ]
 });
-
-
 class AddDeck extends React.Component {
-
   state = {
       deckName: ''
   }
-  
   onPressSalvar = () =>{
     const deckName = this.state.deckName
-    saveDeckTitle(deckName).then(()=>{
+    saveDeckTitle(deckName).then(() => {
         this.props.navigation.dispatch(resetAction);
     })
   }
-
   render() {
     return (
       <View>
