@@ -1,7 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import reducer from './reducers'
 import { Text, View, FlatList, StatusBar, Platform, Button } from 'react-native';
 import { red, gray } from './utils/colors'
 import { Constants } from 'expo'
@@ -70,12 +69,12 @@ const Stack = StackNavigator({
 class App extends React.Component {
   render() { 
     return (
-      <Provider store={createStore(reducer)}>
+      
         <View style={{flex: 1}}>
           <HeaderStatusBar backgroundColor={gray} barStyle="light-content" />
           <Stack></Stack>
         </View>
-      </Provider>
+      
     );
   }
 }

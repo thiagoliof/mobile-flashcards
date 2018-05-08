@@ -16,7 +16,7 @@ class Decks extends React.Component {
 				subtitle={`${item.total} cards`} 
 				onPress={() => this.props.navigation.navigate(
 					'DeckDetail',
-					{entryID: item.key} 
+					{entryID: item} 
 				)}
 				rightIcon={{name: 'create'}}
 				/>

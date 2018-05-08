@@ -6,13 +6,14 @@ class DeckDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
         const { entryID } = navigation.state.params
         return{
-            title: entryID
+            title: `entryID`
         }
     }
     render() {	
 		return (
 			<View>
-                <Text>{this.props.navigation.state.params.entryID}</Text>
+                <Text>{this.props.navigation.state.params.entryID.key}</Text>
+                <Text>questions: {this.props.navigation.state.params.entryID.total}</Text>
             </View>
 		);
 	}
