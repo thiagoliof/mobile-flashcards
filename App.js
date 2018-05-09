@@ -9,6 +9,8 @@ import { StackNavigator  } from 'react-navigation';
 import  Decks  from './components/Decks'
 import  AddDeck  from './components/AddDeck'
 import  DeckDetail  from './components/DeckDetail'
+import  AddCard  from './components/AddCard'
+import  Quiz  from './components/Quiz'
 
 
 function HeaderStatusBar ({backgroundColor, ...props}) {
@@ -63,18 +65,36 @@ const Stack = StackNavigator({
         backgroundColor: 'black'
       },
     })
+  },
+  AddCard:{
+    screen: AddCard,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Add Card',
+      headerTintColor: 'red', 
+      headerStyle:{
+        backgroundColor: 'black'
+      },
+    })
+  },
+  Quiz:{
+    screen: Quiz,
+    navigationOptions: ({ navigation }) => ({
+      headerTintColor: 'red', 
+      headerStyle:{
+        backgroundColor: 'black'
+      },
+    })
   }
+
 })
 
 class App extends React.Component {
   render() { 
     return (
-      
         <View style={{flex: 1}}>
           <HeaderStatusBar backgroundColor={gray} barStyle="light-content" />
           <Stack></Stack>
         </View>
-      
     );
   }
 }
