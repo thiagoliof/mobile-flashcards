@@ -17,7 +17,8 @@ class AddCard extends React.Component {
 	onPressSalvar = () => {
 		const card = {question: this.state.cardQuestion, answer:this.state.cardResp }
 		addCardToDeck(this.props.navigation.state.params.entryID.key, card)
-		this.props.navigation.goBack()
+		//this.props.navigation.state.params.DeckDetail.starQuizPress();
+		this.props.navigation.goBack(null)
 	}
 
 	

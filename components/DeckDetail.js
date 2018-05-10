@@ -24,7 +24,8 @@ class DeckDetail extends React.Component {
     // }
     
     render() {	
-		return (
+        console.log('rendered')
+        return (
 			<View>
                 <View>
                     <Text>{this.props.navigation.state.params.entryID.key}</Text>
