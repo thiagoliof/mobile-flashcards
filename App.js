@@ -12,6 +12,8 @@ import  DeckDetail  from './components/DeckDetail'
 import  AddCard  from './components/AddCard'
 import  Quiz  from './components/Quiz'
 
+import reducer from './reducers'
+
 
 function HeaderStatusBar ({backgroundColor, ...props}) {
   return (
@@ -88,13 +90,17 @@ const Stack = StackNavigator({
 
 })
 
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
 class App extends React.Component {
   render() { 
     return (
-        <View style={{flex: 1}}>
-          <HeaderStatusBar backgroundColor={gray} barStyle="light-content" />
-          <Stack></Stack>
-        </View>
+        <Provider store={store} >
+          <View style={{flex: 1}}>
+            <HeaderStatusBar backgroundColor={gray} barStyle="light-content" />
+            <Stack></Stack>
+          </View>
+        </Provider>
     );
   }
 }
