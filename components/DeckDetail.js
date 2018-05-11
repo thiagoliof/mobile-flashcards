@@ -43,7 +43,7 @@ class DeckDetail extends React.Component {
                         )} title="add card press" />
                     <Button onPress={() => this.props.navigation.navigate(
                         'Quiz',
-                        {} 
+                        {item: details} 
                         )} title="start quiz" />
                 </View>
             </View>
