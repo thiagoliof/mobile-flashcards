@@ -1,10 +1,9 @@
 import React from 'react';
 import { NavigationActions } from 'react-navigation';
 import { Text, View, TextInput, Button, StyleSheet} from 'react-native';
-import  { saveDeckTitle }  from '../utils/api';
+import  { saveDeckTitle , getDecks}  from '../utils/api';
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
-
 
 class AddDeck extends React.Component {
   state = {
@@ -13,7 +12,11 @@ class AddDeck extends React.Component {
   onPressSalvar = () =>{
     const deckName = this.state.deckName
     saveDeckTitle(deckName).then(() => {
-        //this.props.navigation.dispatch(resetAction);
+      getDecks().then(result => {
+        
+        this.props.addDeck(JSON.parse(result))
+				this.props.navigation.goBack() 
+			})
     })
   }
   render() {
@@ -39,18 +42,21 @@ class AddDeck extends React.Component {
   }
 }
 
-// function mapStateToProps ({ deck }) {
-//     return {
-//       deck: deck.payload
-//     }
-//   }
+function mapStateToProps ({ deck }) {
+    return {
+      deck: deck.payload
+    }
+  }
   
-   function mapDispatchToProps (dispatch) {
-     return {
-       addDeck: (data) => dispatch(addDeck(data)),
-     }
-   }
+  function mapDispatchToProps (dispatch) {
+	  return {
+	      addDeck: (data) => dispatch(addDeck(data)),
+	    }
+  }
+
+
+export default connect(mapStateToProps, mapDispatchToProps)( AddDeck )
   
-  export default connect()(AddDeck)
+  
 
 
