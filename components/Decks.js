@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation';
+import { addDeck } from '../actions'
 import { Text, View, FlatList, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import { getDeckMetaInfo, itemDetails } from '../utils/helpers';
+import { itemDetails } from '../utils/helpers';
 import  { getDecks }  from '../utils/api';
   
 
@@ -16,7 +18,7 @@ class Decks extends React.Component {
 				subtitle={`${item.total} cards`} 
 				onPress={() => this.props.navigation.navigate(
 					'DeckDetail',
-					{entryID: item} 
+					{item: item} 
 				)}
 				rightIcon={{name: 'create'}}
 				/>
@@ -25,9 +27,7 @@ class Decks extends React.Component {
 
 	componentDidMount(){
 		getDecks().then(result => {
-			this.setState({
-				result: JSON.parse(result)
-			})
+			this.props.addDeck(JSON.parse(result))
 		})
 	}
 
@@ -43,7 +43,8 @@ class Decks extends React.Component {
 	};
 
 	render() {
-		const metaInfo = this.state.result
+		
+		const metaInfo = this.props.deck
 		const data = metaInfo ? Object.keys(metaInfo).map((key) => {
 			const details = itemDetails(metaInfo, key)
 			return {key: key, total: details.questions ? details.questions.length : 0 }
@@ -72,7 +73,24 @@ const styles = StyleSheet.create({
 	  color:'#fff',
 	  
 	},
-  });
+});
 
-export default Decks
+function mapStateToProps ({ deck }) {
+  return {
+    deck: deck.payload
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    addDeck: (data) => dispatch(addDeck(data)),
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Decks)
+
+
 

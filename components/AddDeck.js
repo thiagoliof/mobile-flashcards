@@ -2,16 +2,10 @@ import React from 'react';
 import { NavigationActions } from 'react-navigation';
 import { Text, View, TextInput, Button, StyleSheet} from 'react-native';
 import  { saveDeckTitle }  from '../utils/api';
+import { connect } from 'react-redux'
+import { addDeck } from '../actions'
 
 
-
-const resetAction = NavigationActions.reset({
-    index: 0,
-    key: null,
-    actions: [
-        NavigationActions.navigate({routeName: 'Home'})
-    ]
-});
 class AddDeck extends React.Component {
   state = {
       deckName: ''
@@ -19,7 +13,7 @@ class AddDeck extends React.Component {
   onPressSalvar = () =>{
     const deckName = this.state.deckName
     saveDeckTitle(deckName).then(() => {
-        this.props.navigation.dispatch(resetAction);
+        //this.props.navigation.dispatch(resetAction);
     })
   }
   render() {
@@ -45,5 +39,18 @@ class AddDeck extends React.Component {
   }
 }
 
-export default AddDeck
+// function mapStateToProps ({ deck }) {
+//     return {
+//       deck: deck.payload
+//     }
+//   }
+  
+   function mapDispatchToProps (dispatch) {
+     return {
+       addDeck: (data) => dispatch(addDeck(data)),
+     }
+   }
+  
+  export default connect()(AddDeck)
+
 

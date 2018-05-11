@@ -1,27 +1,27 @@
 import React from 'react';
 import { NavigationActions } from 'react-navigation';
 import { Text, View, TextInput, Button} from 'react-native';
-import  { addCardToDeck }  from '../utils/api';
+import  { addCardToDeck, getDecks }  from '../utils/api';
+import { addDeck } from '../actions'
+import { connect } from 'react-redux'
 
-// const resetAction = NavigationActions.reset({
-//     index: 1,
-//     key: null,
-//     actions: [
-//         NavigationActions.navigate({routeName: 'DeckDetail', })
-//     ]
-// }); 
 
 class AddCard extends React.Component {
+	
 	state = { cardQuestion: '', cardResp: '' }
 
 	onPressSalvar = () => {
 		const card = {question: this.state.cardQuestion, answer:this.state.cardResp }
-		addCardToDeck(this.props.navigation.state.params.entryID.key, card)
-		//this.props.navigation.state.params.DeckDetail.starQuizPress();
-		this.props.navigation.goBack(null)
+		const { title, questions } = this.props.navigation.state.params.item
+		questions.push(card)
+		addCardToDeck(title, questions).then((result)=> {
+			getDecks().then(result => {
+				this.props.addDeck(JSON.parse(result))
+				this.props.navigation.goBack() 
+			})
+		})
 	}
 
-	
     render() {	
 		return (
 			<View>
@@ -47,7 +47,18 @@ class AddCard extends React.Component {
 	}
 }
 
+function mapStateToProps ({ deck }) {
+	return {
+	  deck: deck.payload
+	}
+  }
+  
+  function mapDispatchToProps (dispatch) {
+	return {
+	  addDeck: (data) => dispatch(addDeck(data)),
+	}
+  }
 
 
-export default AddCard
+export default connect(mapStateToProps, mapDispatchToProps)( AddCard )
 

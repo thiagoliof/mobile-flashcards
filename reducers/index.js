@@ -39,11 +39,12 @@ const infoDeckState = {
     
   }
 
-function deck (state = infoDeckState, action){
+function deck (state = {}, action){
     switch (action.type) {
         case ADD_DECK :
+            const { payload } = action
             return {
-                state
+                payload
             }
         default :
             return state

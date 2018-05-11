@@ -1,19 +1,21 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
+import { connect } from 'react-redux'
+import { itemDetails } from '../utils/helpers';
 
 
 class DeckDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
-        const { entryID } = navigation.state.params
+        const { item } = navigation.state.params
         return{
-            title: `${entryID.key}`
+            title: `${item.key}`
         }
     }
     addCardPress = () => {
-        const { entryID } = navigation.state.params
+        const { item } = navigation.state.params
         this.props.navigation.navigate(
             'AddCard',
-            {entryID: entryID} 
+            {item: item} 
         )
     }
     starQuizPress = () => {
@@ -24,17 +26,20 @@ class DeckDetail extends React.Component {
     // }
     
     render() {	
-        console.log('rendered')
+        const { deck } = this.props
+        const { item } = this.props.navigation.state.params
+        const details = itemDetails(deck, item.key)
+
         return (
 			<View>
                 <View>
-                    <Text>{this.props.navigation.state.params.entryID.key}</Text>
-                    <Text>questions: {this.props.navigation.state.params.entryID.total}</Text>
+                    <Text>{details.title}</Text>
+                    <Text>questions: {details.questions.length }</Text>
                 </View>
                 <View>
                     <Button onPress={() => this.props.navigation.navigate(
                         'AddCard',
-                        {entryID: this.props.navigation.state.params.entryID} 
+                        {item: details} 
                         )} title="add card press" />
                     <Button onPress={() => this.props.navigation.navigate(
                         'Quiz',
@@ -47,6 +52,11 @@ class DeckDetail extends React.Component {
 }
 
 
+function mapStateToProps ({ deck }) {
+    return {
+      deck: deck.payload
+    }
+  }
 
-export default DeckDetail
-
+  
+export default connect(mapStateToProps,)(DeckDetail)
