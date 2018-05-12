@@ -34,11 +34,6 @@ const Stack = StackNavigator({
         backgroundColor: '#391E64'
       },
       headerRight: (
-        // <Button
-        //   
-        //   title="Add"
-        //   color="#fff"
-        // />
         <EvilIcons 
           name="plus" 
           size={32} 
@@ -52,18 +47,19 @@ const Stack = StackNavigator({
   AddDeck:{
     screen: AddDeck,
     navigationOptions: ({ navigation }) => ({
-      title : 'add deck',
+      // title : 'Criar Baralho',
+      headerTintColor: 'white', 
       headerStyle:{
-        backgroundColor: 'black'
+        backgroundColor: '#391E64'
       },
     })
   },
   DeckDetail:{
     screen: DeckDetail,
     navigationOptions: ({ navigation }) => ({
-      headerTintColor: 'red', 
+      headerTintColor: 'white', 
       headerStyle:{
-        backgroundColor: 'black'
+        backgroundColor: '#391E64'
       },
     })
   },
@@ -71,18 +67,18 @@ const Stack = StackNavigator({
     screen: AddCard,
     navigationOptions: ({ navigation }) => ({
       title: 'Add Card',
-      headerTintColor: 'red', 
+      headerTintColor: 'white', 
       headerStyle:{
-        backgroundColor: 'black'
+        backgroundColor: '#391E64'
       },
     })
   },
   Quiz:{
     screen: Quiz,
     navigationOptions: ({ navigation }) => ({
-      headerTintColor: 'red', 
+      headerTintColor: 'white', 
       headerStyle:{
-        backgroundColor: 'black'
+        backgroundColor: '#391E64'
       },
     })
   }
