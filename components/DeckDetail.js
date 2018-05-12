@@ -38,12 +38,12 @@ class DeckDetail extends React.Component {
                      title="Adicionar"
                      color="#80B2C9"
                      />
-                     <Button onPress={() => this.props.navigation.navigate(
+                     {details.questions.length && <Button onPress={() => this.props.navigation.navigate(
                          'Quiz',
                          {item: details} 
                          )} title="Jogar" 
                          color="#80B2C9"
-                    />
+                    />}
                 </View>
             </View>
         );
