@@ -6,6 +6,8 @@ import { red, gray } from './utils/colors'
 import { Constants } from 'expo'
 import { StackNavigator  } from 'react-navigation';
 
+import { EvilIcons } from '@expo/vector-icons';
+
 import  Decks  from './components/Decks'
 import  AddDeck  from './components/AddDeck'
 import  DeckDetail  from './components/DeckDetail'
@@ -22,31 +24,28 @@ function HeaderStatusBar ({backgroundColor, ...props}) {
     </View>
   )
 }
-
-// function Dash(){
-//   return(
-//     <View>
-//       <Text>Dash</Text>
-//     </View>
-//   )
-// }
-
-
 const Stack = StackNavigator({
   Home: {
     screen: Decks,
     navigationOptions: ({ navigation }) => ({
-      title: 'Decks',
-      headerTintColor: 'red', 
+      title: 'Baralhos',
+      headerTintColor: 'white', 
       headerStyle:{
-        backgroundColor: 'black'
+        backgroundColor: '#391E64'
       },
       headerRight: (
-        <Button
-          onPress={() => { navigation.navigate('AddDeck'); }}
-          title="Add"
-          color="#fff"
-        />
+        // <Button
+        //   
+        //   title="Add"
+        //   color="#fff"
+        // />
+        <EvilIcons 
+          name="plus" 
+          size={32} 
+          color="white"
+          style={{marginRight:10}}
+          onPress={() => { navigation.navigate('AddDeck')}}
+          />
       ),
     })
   },
@@ -97,7 +96,7 @@ class App extends React.Component {
     return (
         <Provider store={store} >
           <View style={{flex: 1}}>
-            <HeaderStatusBar backgroundColor={gray} barStyle="light-content" />
+            <HeaderStatusBar backgroundColor={'#391E64'} barStyle="light-content" />
             <Stack></Stack>
           </View>
         </Provider>
