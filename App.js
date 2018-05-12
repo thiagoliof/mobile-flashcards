@@ -11,6 +11,7 @@ import  AddDeck  from './components/AddDeck'
 import  DeckDetail  from './components/DeckDetail'
 import  AddCard  from './components/AddCard'
 import  Quiz  from './components/Quiz'
+import  Score  from './components/Score'
 import reducer from './reducers'
 
 
@@ -78,7 +79,17 @@ const Stack = StackNavigator({
                     backgroundColor: '#391E64'
                 },
             })
-        }
+    },
+    Score:{
+        screen: Score,
+            navigationOptions: ({ navigation }) => ({
+                title: 'Pontos',
+                headerTintColor: 'white', 
+                headerStyle:{
+                    backgroundColor: '#391E64'
+                },
+            })
+    }
 })
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 class App extends React.Component {
