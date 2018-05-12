@@ -46,7 +46,7 @@ class Decks extends React.Component {
 		}):[]
 		return (
 			<FlatList
-				style={{ marginTop: 0 }}
+				style={styles.container}
 				contentContainerStyle={styles.list}
 				data={data}
 				renderItem={this.renderItem}
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
 		padding: 30,
 		color:'#fff',
 	},
+	container:{
+		backgroundColor: 'white',
+	}
 });
 function mapStateToProps ({ deck }) {
 	return {

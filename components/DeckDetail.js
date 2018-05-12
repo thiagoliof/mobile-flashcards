@@ -1,8 +1,7 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux'
 import { itemDetails } from '../utils/helpers';
-
 
 class DeckDetail extends React.Component {
     static navigationOptions = ({ navigation }) => {
@@ -21,42 +20,56 @@ class DeckDetail extends React.Component {
     starQuizPress = () => {
         console.log("starQuizPress")
     }
-    // componentDidMount = () =>{
-    //     console.log("deck details")
-    // }
-    
     render() {	
         const { deck } = this.props
         const { item } = this.props.navigation.state.params
         const details = itemDetails(deck, item.key)
-
         return (
-			<View>
-                <View>
-                    <Text>{details.title}</Text>
-                    <Text>questions: {details.questions.length }</Text>
+            <View style={styles.container}>
+                <View style={[styles.box, {flex: 1,}]}>
+                    <Text style={[styles.text, {marginTop:70}]}>{details.title}</Text>
+                    <Text style={[styles.text, {marginTop:10}]}>{details.questions.length } Cartão</Text>
                 </View>
-                <View>
+                <View style={[styles.box, {flex: 2}]}>
                     <Button onPress={() => this.props.navigation.navigate(
-                        'AddCard',
-                        {item: details} 
-                        )} title="add card press" />
-                    <Button onPress={() => this.props.navigation.navigate(
-                        'Quiz',
-                        {item: details} 
-                        )} title="start quiz" />
+                         'AddCard',
+                         {item: details} 
+                     )} 
+                     title="Adicionar"
+                     color="#80B2C9"
+                     />
+                     <Button onPress={() => this.props.navigation.navigate(
+                         'Quiz',
+                         {item: details} 
+                         )} title="Jogar" 
+                         color="#80B2C9"
+                    />
                 </View>
             </View>
-		);
-	}
+        );
+    }
 }
-
-
 function mapStateToProps ({ deck }) {
     return {
-      deck: deck.payload
+        deck: deck.payload
     }
-  }
+}
 
-  
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        backgroundColor: 'white',
+    },
+    box: {
+        marginLeft: 20,
+        marginRight: 20,
+        backgroundColor: 'white',
+    },
+    text:{
+        textAlign: 'center'
+    }
+})
+
 export default connect(mapStateToProps,)(DeckDetail)
