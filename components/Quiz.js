@@ -67,14 +67,16 @@ class Quiz extends React.Component {
 					>
 						{/* Face Side */}
 						<View style={styles.face}>
-							<Text>{question}</Text>
+							<Text style={styles.text}>
+								{question}
+							</Text>
 							<Button onPress={() => this.onPressResposta()}
 									title="ver Resposta" 
 									color="#80B2C9" />
 						</View>
 						{/* Back Side */}
 						<View style={styles.back}>
-							<Text>
+							<Text style={styles.text}>
 								{answer}
 							</Text>	
 							<View>
@@ -97,7 +99,7 @@ class Quiz extends React.Component {
 }
 
 const width = Dimensions.get('window').width - 30
-const height = Dimensions.get('window').height - 300
+const height = Dimensions.get('window').height - 250
 
 const styles = StyleSheet.create({
 	container: {
@@ -109,20 +111,26 @@ const styles = StyleSheet.create({
 	card:{
 		top:0,
 		width,
-		borderColor:'transparent'
+		borderColor:'transparent',
 	},
 	face: {
-		backgroundColor:'#3D87A3',
-		height
+		backgroundColor:'#DFEDF4',
+		height,
+		borderRadius: 25
 	},
 	back: {
-		backgroundColor:'#DFEDF4',
-		height
+		backgroundColor:'#3D87A3',
+		height,
+		borderRadius: 25
 	},
 	box: {
         margin: 20,
         backgroundColor: 'white'
-    },
+	},
+	text:{
+		textAlign: 'center',
+		fontSize: 20
+    }
 	
 });
 
