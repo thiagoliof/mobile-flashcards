@@ -6,8 +6,18 @@ import FlipCard from 'react-native-flip-card'
 import  { purple, red }  from '../utils/colors';
 
 class Quiz extends React.Component {
+
+	state = { 
+		flip: false, 
+	}
+
+	onPressResposta = () =>{
+		this.setState({
+			flip:true
+		})
+	}
 	
-	onPress = (plus) => {
+	onPressCount = (plus) => {
 		const deck = this.props.deck
 		const { item, position, corrects } = this.props.navigation.state.params
 		const _corrects = corrects + (plus)
@@ -50,14 +60,17 @@ class Quiz extends React.Component {
 						perspective={1000}
 						flipHorizontal={true}
 						flipVertical={false}
-						flip={false}
-						clickable={true}
+						flip={this.state.flip}
+						clickable={false}
 						alignWidth={true}
 						onFlipEnd={(isFlipEnd)=>{console.log('isFlipEnd', isFlipEnd)}}
 					>
 						{/* Face Side */}
 						<View style={styles.face}>
 							<Text>{question}</Text>
+							<Button onPress={() => this.onPressResposta()}
+									title="ver Resposta" 
+									color="#80B2C9" />
 						</View>
 						{/* Back Side */}
 						<View style={styles.back}>
@@ -65,11 +78,11 @@ class Quiz extends React.Component {
 								{answer}
 							</Text>	
 							<View>
-								<Button onPress={() => this.onPress(1)}
+								<Button onPress={() => this.onPressCount(1)}
 									title="Acertei" 
 									color="#80B2C9" />
 								
-								<Button onPress={() =>this.onPress(0)}
+								<Button onPress={() =>this.onPressCount(0)}
 									title="Errei" 
 									color="#80B2C9" />
 

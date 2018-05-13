@@ -12,8 +12,6 @@ class Score extends React.Component {
 			actions: [NavigationActions.navigate({ routeName: 'Home' })]
 		}))
 	}
-	
-
 	render() {	
 		const { corrects } = this.props.navigation.state.params
 		return (
