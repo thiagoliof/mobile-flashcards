@@ -9,9 +9,6 @@ import { addGame } from '../actions'
 
 class Quiz extends React.Component {
 
-	state = { 
-		flip: false, 
-	}
 	onPressResposta = () =>{
 		const game = this.props.game
 		const title = game.title
@@ -38,7 +35,7 @@ class Quiz extends React.Component {
 	} 
 	render() {	
 		const game = this.props.game
-		const { position, data, fliped } = game
+		const { position, data } = game
 		const obj = data[position]
 		return (
 			<View style={styles.container}>
@@ -55,7 +52,7 @@ class Quiz extends React.Component {
 						flip={obj.fliped}
 						clickable={false}
 						alignWidth={true}
-						onFlipEnd={(isFlipEnd)=>{console.log('isFlipEnd', isFlipEnd)}}
+						onFlipEnd={(isFlipEnd)=>{}}
 					>
 						{/* Face Side */}
 						<View style={styles.face}>
@@ -63,7 +60,7 @@ class Quiz extends React.Component {
 								{obj.question}
 							</Text>
 							<Button onPress={() => this.onPressResposta()}
-									title="ver Resposta" 
+									title="Ver Resposta" 
 									color="#80B2C9" />
 						</View>
 						{/* Back Side */}
