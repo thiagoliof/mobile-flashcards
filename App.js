@@ -4,7 +4,7 @@ import { createStore } from 'redux'
 import { Text, View, FlatList, StatusBar, Platform, Button, StyleSheet } from 'react-native';
 import { red, gray } from './utils/colors'
 import { Constants } from 'expo'
-import { StackNavigator  } from 'react-navigation';
+import { StackNavigator, TabNavigator  } from 'react-navigation';
 import { EvilIcons } from '@expo/vector-icons';
 import  Decks  from './components/Decks'
 import  AddDeck  from './components/AddDeck'
@@ -13,6 +13,7 @@ import  AddCard  from './components/AddCard'
 import  Quiz  from './components/Quiz'
 import  Score  from './components/Score'
 import reducer from './reducers'
+import { setLocalNotification } from './utils/helpers';
 
 
 function HeaderStatusBar ({backgroundColor, ...props}) {
@@ -22,6 +23,7 @@ function HeaderStatusBar ({backgroundColor, ...props}) {
         </View>
     )
 }
+
 const Stack = StackNavigator({
     Home: {
         screen: Decks,
@@ -93,6 +95,9 @@ const Stack = StackNavigator({
 })
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 class App extends React.Component {
+    componentDidMount(){
+        setLocalNotification()
+    }
     render() { 
         return (
             <Provider store={store} >

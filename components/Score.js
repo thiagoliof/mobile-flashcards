@@ -3,9 +3,15 @@ import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation';
 import { Text, View, StyleSheet, Dimensions, Button } from 'react-native';
 import { addGame } from '../actions'
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers';
 
 class Score extends React.Component {
 	
+	componentDidMount(){
+		clearLocalNotification()
+			.then(setLocalNotification)
+	}
+
 	goHome = () => {
 		this.props.navigation.dispatch(NavigationActions.reset({
 			index: 0,
