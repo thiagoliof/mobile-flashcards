@@ -17,7 +17,7 @@ class Score extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={[styles.box, {top:20, }]}>
-					<Text>{corrects} Ponto(s) </Text>
+					<Text style={styles.text}>{corrects} Ponto(s) </Text>
 				</View>
 				<View>
 					<Button title="Início" onPress={() => this.reset()}
@@ -47,6 +47,10 @@ const styles = StyleSheet.create({
         margin: 20,
         backgroundColor: 'white'
     },
+	text:{
+		textAlign: 'center',
+		fontSize: 20
+    }
 	
 });
 

@@ -28,7 +28,7 @@ class DeckDetail extends React.Component {
             <View style={styles.container}>
                 <View style={[styles.box, {flex: 1,}]}>
                     <Text style={[styles.text, {marginTop:70}]}>{details.title}</Text>
-                    <Text style={[styles.text, {marginTop:10}]}>{details.questions.length } Cartão</Text>
+                    <Text style={[styles.textQtdCartao, {marginTop:10}]}>{details.questions.length === 1 ? `${details.questions.length} Cartão` : `${details.questions.length} Cartões` }</Text>
                 </View>
                 <View style={[styles.box, {flex: 2}]}>
                     <Button onPress={() => this.props.navigation.navigate(
@@ -73,7 +73,11 @@ const styles = StyleSheet.create({
     },
     text:{
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 40
+    },
+    textQtdCartao:{
+        textAlign: 'center',
+        fontSize: 30
     }
 })
 

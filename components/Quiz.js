@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
 		borderRadius: 25
 	},
 	back: {
-		backgroundColor:'#3D87A3',
+		backgroundColor:'#e8d5b5',
 		height,
 		borderRadius: 25
 	},
@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		fontSize: 20
     }
-	
 });
 
 function mapStateToProps ({ deck }) {
