@@ -4,54 +4,46 @@ import { Text, View, StyleSheet, Dimensions, Button } from 'react-native';
 import { itemDetails } from '../utils/helpers';
 import FlipCard from 'react-native-flip-card'
 import  { purple, red }  from '../utils/colors';
+import { addGame } from '../actions'
+
 
 class Quiz extends React.Component {
 
 	state = { 
 		flip: false, 
 	}
-
 	onPressResposta = () =>{
-		this.setState({
-			flip:true
-		})
+		const game = this.props.game
+		const title = game.title
+		const { position } = game
+		game.data[position].fliped = true
+		const data = game.data
+		this.props.addGame({title: game.title, data, position})
 	}
-	
 	onPressCount = (plus) => {
-		const deck = this.props.deck
-		const { item, position, corrects } = this.props.navigation.state.params
-		const _corrects = corrects + (plus)
-		const details = itemDetails(deck, item.title)
-		if(position + 1 < details.questions.length){
-			this.props.navigation.navigate(
-				'Quiz',
-				{
-					item: details, 
-					position:(position + 1),
-					corrects:_corrects
-				} 
-			)
+		const game = this.props.game
+		const { position } = game
+		game.data[position].correct = plus === 1 ? true: false
+		game.data[position].answered = true		
+		if(position + 1 < game.data.length){
+			game.position = position + 1
+			this.props.addGame({title: game.title, data:game.data, position:game.position})
 		}
 		else{
+			this.props.addGame({title: game.title, data:game.data, position:game.position})
 			this.props.navigation.navigate(
-				'Score',{
-					corrects:_corrects
-				}
+				'Score',{}
 			)
 		}
 	} 
-	
-
 	render() {	
-		const deck = this.props.deck
-		const { item, position } = this.props.navigation.state.params
-		const details = itemDetails(deck, item.title)
-		const question = details.questions[position].question
-		const answer = details.questions[position].answer
+		const game = this.props.game
+		const { position, data, fliped } = game
+		const obj = data[position]
 		return (
 			<View style={styles.container}>
 				<View style={[styles.box, {top:20, flex:1}]}>
-					<Text>{position + 1} de {details.questions.length}</Text>
+					<Text>{position + 1} de {data.length}</Text>
 				</View>
 				<View style={[styles.box, {flex: 5}]}>
 					<FlipCard 
@@ -60,7 +52,7 @@ class Quiz extends React.Component {
 						perspective={1000}
 						flipHorizontal={true}
 						flipVertical={false}
-						flip={this.state.flip}
+						flip={obj.fliped}
 						clickable={false}
 						alignWidth={true}
 						onFlipEnd={(isFlipEnd)=>{console.log('isFlipEnd', isFlipEnd)}}
@@ -68,7 +60,7 @@ class Quiz extends React.Component {
 						{/* Face Side */}
 						<View style={styles.face}>
 							<Text style={styles.text}>
-								{question}
+								{obj.question}
 							</Text>
 							<Button onPress={() => this.onPressResposta()}
 									title="ver Resposta" 
@@ -77,7 +69,7 @@ class Quiz extends React.Component {
 						{/* Back Side */}
 						<View style={styles.back}>
 							<Text style={styles.text}>
-								{answer}
+								{obj.answer}
 							</Text>	
 							<View>
 								<Button onPress={() => this.onPressCount(1)}
@@ -87,9 +79,7 @@ class Quiz extends React.Component {
 								<Button onPress={() =>this.onPressCount(0)}
 									title="Errei" 
 									color="#80B2C9" />
-
 							</View>
-							
 						</View>
 					</FlipCard> 
 				</View>
@@ -133,11 +123,17 @@ const styles = StyleSheet.create({
     }
 });
 
-function mapStateToProps ({ deck }) {
+function mapStateToProps ({ deck, game }) {
 	return {
-		deck: deck.payload
+		deck: deck.payload,
+		game: game.payload
 	}
 }
 
-export default connect(mapStateToProps, )( Quiz )
+function mapDispatchToProps (dispatch) {
+	return {
+		addGame: (data) => dispatch(addGame(data)),
+	}
+}
+export default connect(mapStateToProps,mapDispatchToProps)( Quiz )
 

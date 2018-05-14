@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux'
+import { addGame } from '../actions'
 import { itemDetails } from '../utils/helpers';
 
 class DeckDetail extends React.Component {
@@ -17,8 +18,22 @@ class DeckDetail extends React.Component {
             {item: item} 
         )
     }
-    starQuizPress = () => {
-        console.log("starQuizPress")
+    starQuizPress = (details) => {
+        const title = details.title        
+        const data = details.questions.map((obj) => {
+            return { 
+                question: obj.question, 
+                answer: obj.answer, 
+                answered:false, 
+                fliped: false,
+                correct: null 
+            }
+        })
+        this.props.addGame({title, data, position:0})
+        this.props.navigation.navigate(
+            'Quiz',
+            {} 
+        )
     }
     render() {	
         const { deck } = this.props
@@ -38,14 +53,7 @@ class DeckDetail extends React.Component {
                      title="Adicionar"
                      color="#80B2C9"
                      />
-                     {details.questions.length && <Button onPress={() => this.props.navigation.navigate(
-                         'Quiz',
-                         {
-                             item: details, 
-                             position:0,
-                             corrects:0
-                         } 
-                         )} title="Jogar" 
+                     {details.questions.length && <Button onPress={() => this.starQuizPress(details)} title="Jogar" 
                          color="#80B2C9"
                     />}
                 </View>
@@ -53,11 +61,7 @@ class DeckDetail extends React.Component {
         );
     }
 }
-function mapStateToProps ({ deck }) {
-    return {
-        deck: deck.payload
-    }
-}
+
 
 const styles = StyleSheet.create({
     container: {
@@ -81,4 +85,16 @@ const styles = StyleSheet.create({
     }
 })
 
-export default connect(mapStateToProps,)(DeckDetail)
+function mapStateToProps ({ deck }) {
+    return {
+        deck: deck.payload
+    }
+}
+
+function mapDispatchToProps (dispatch) {
+	return {
+		addGame: (data) => dispatch(addGame(data)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail)
