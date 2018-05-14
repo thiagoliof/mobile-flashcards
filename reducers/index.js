@@ -1,5 +1,6 @@
 import {
-    ADD_DECK,
+	ADD_DECK, 
+	ADD_GAME
 } from '../actions'
 
 import { combineReducers } from 'redux';
@@ -51,4 +52,25 @@ function deck (state = {}, action){
     }
 }
 
-export default combineReducers({ deck }) 
+const gameInfo = {
+    title: 'React',
+    position: 0,
+    data: [
+      {question: 'What is React?', answer: 'is a framework', correct: true, fliped:false},
+      {question: 'What is javascript?', answer: 'is a language', correct: false, fliped:true},
+    ],
+}
+function game (state = {}, action){
+  
+  switch (action.type) {
+		case ADD_GAME :
+			const { payload } = action
+			return {
+				payload
+			}
+		default :
+			return state
+	}
+}
+
+export default combineReducers({ deck, game }) 
