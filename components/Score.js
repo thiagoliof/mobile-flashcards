@@ -40,19 +40,17 @@ class Score extends React.Component {
 		}, 0 );
 		return (
 			<View style={styles.container}>
-				<View style={[styles.box, {top:20, }]}>
-					<Text style={styles.text}> {sum } Ponto(s) </Text>
+				<View style={styles.header}>
+					<Text style={styles.text}> {sum} Ponto(s) </Text>
 				</View>
-				<View>
-					<Button title="Início" onPress={() => this.goHome()}
-						/>
-				</View>
-				<View>
+				<View style={styles.box}>
 					<Button 
 						onPress={() => this.resetQuiz()} 
 						title="Reiniciar o Quiz"
 						color="#80B2C9"
 						/>
+
+					<Button title="Início" color="#80B2C9" onPress={() => this.goHome()}/>
 				</View>
 			</View>
 		);
@@ -61,20 +59,27 @@ class Score extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
-		backgroundColor: 'white'
-	},
-	box: {
-        margin: 20,
-        backgroundColor: 'white'
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: 'white',
     },
-	text:{
-		textAlign: 'center',
-		fontSize: 20
-    }
-	
+    header:{
+        flex: 1,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    box: {
+        flex: 2,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    text:{
+        fontSize: 50
+    },
 });
 
 function mapStateToProps ({ game }) {
