@@ -41,11 +41,11 @@ class DeckDetail extends React.Component {
         const details = itemDetails(deck, item.key)
         return (
             <View style={styles.container}>
-                <View style={[styles.box, {flex: 1,}]}>
-                    <Text style={[styles.text, {marginTop:70}]}>{details.title}</Text>
-                    <Text style={[styles.textQtdCartao, {marginTop:10}]}>{details.questions.length === 1 ? `${details.questions.length} Cartão` : `${details.questions.length} Cartões` }</Text>
+                <View style={styles.header}>
+                    <Text style={[styles.text,]}>{details.title}</Text>
+                    <Text style={[styles.textQtdCartao]}>{details.questions.length === 1 ? `${details.questions.length} Cartão` : `${details.questions.length} Cartões` }</Text>
                 </View>
-                <View style={[styles.box, {flex: 2}]}>
+                <View style={styles.box} >
                     <Button onPress={() => this.props.navigation.navigate(
                          'AddCard',
                          {item: details} 
@@ -67,20 +67,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        alignItems: 'stretch',
+        alignItems: 'center',
         backgroundColor: 'white',
+    },
+    header:{
+        flex: 1,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     box: {
-        marginLeft: 20,
-        marginRight: 20,
-        backgroundColor: 'white',
+        flex: 2,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+        alignItems: 'center',
+
     },
     text:{
-        textAlign: 'center',
-        fontSize: 40
+        fontSize: 50
     },
     textQtdCartao:{
-        textAlign: 'center',
         fontSize: 30
     }
 })

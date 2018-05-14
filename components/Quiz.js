@@ -39,10 +39,10 @@ class Quiz extends React.Component {
 		const obj = data[position]
 		return (
 			<View style={styles.container}>
-				<View style={[styles.box, {top:20, flex:1}]}>
-					<Text>{position + 1} de {data.length}</Text>
+				<View style={styles.header}>
+					<Text style={{fontSize:17}}>{position + 1} de {data.length}</Text>
 				</View>
-				<View style={[styles.box, {flex: 5}]}>
+				<View style={styles.body}>
 					<FlipCard 
 						style={styles.card}
 						friction={6}
@@ -56,19 +56,28 @@ class Quiz extends React.Component {
 					>
 						{/* Face Side */}
 						<View style={styles.face}>
-							<Text style={styles.text}>
-								{obj.question}
-							</Text>
-							<Button onPress={() => this.onPressResposta()}
+							
+							<View style={{top:20}}>
+								<Text style={[styles.text]}>
+									{obj.question}
+								</Text>
+							</View>
+							
+							<View style={{top:250}}>
+								<Button onPress={() => this.onPressResposta()}
 									title="Ver Resposta" 
 									color="#80B2C9" />
+							</View>
 						</View>
 						{/* Back Side */}
 						<View style={styles.back}>
-							<Text style={styles.text}>
-								{obj.answer}
-							</Text>	
-							<View>
+							<View style={{top:20}}>
+								<Text style={[styles.text]}>
+									{obj.answer}
+								</Text>
+							</View>
+							<View style={{top:250}}>
+								
 								<Button onPress={() => this.onPressCount(1)}
 									title="Acertei" 
 									color="#80B2C9" />
@@ -85,16 +94,27 @@ class Quiz extends React.Component {
 	}
 }
 
-const width = Dimensions.get('window').width - 30
-const height = Dimensions.get('window').height - 250
+const width = Dimensions.get('window').width - 60
+const height = Dimensions.get('window').height - 150
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: 'flex-start',
 		backgroundColor: 'white'
 	},
+	header:{
+        flex: 1,
+        backgroundColor: 'transparent',
+        justifyContent: 'center',
+		alignItems: 'center',
+	},
+	body:{
+        flex: 10,
+        backgroundColor: 'transparent',
+        justifyContent: 'flex-start',
+		alignItems: 'center',
+    },
 	card:{
 		top:0,
 		width,
@@ -103,21 +123,20 @@ const styles = StyleSheet.create({
 	face: {
 		backgroundColor:'#DFEDF4',
 		height,
-		borderRadius: 25
+		borderRadius: 50
 	},
 	back: {
 		backgroundColor:'#e8d5b5',
 		height,
-		borderRadius: 25
-	},
-	box: {
-        margin: 20,
-        backgroundColor: 'white'
+		borderRadius: 50
 	},
 	text:{
 		textAlign: 'center',
 		fontSize: 20
-    }
+	},
+	button:{
+		justifyContent: 'flex-end',
+	}
 });
 
 function mapStateToProps ({ deck, game }) {
