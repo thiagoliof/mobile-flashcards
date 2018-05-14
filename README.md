@@ -1,4 +1,4 @@
-Projeto #m3-react-native do Udacity
+Projeto m3-react-native do Udacity
 
 # Instruções para rodar o projeto
 ```git clone git@github.com:thiagoliof/mobile-flashcards.git```
