@@ -9,4 +9,4 @@ Projeto m3-react-native do Udacity
 O projeto fez uso do Redux através do React-Redux, react-native-elements, react-native-flip-card, react-navigation.
 
 # Plataforma de teste
-O App foi desenvolvido e testado para iOS.
+O App foi desenvolvido para e otimizado para iOS.
