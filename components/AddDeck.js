@@ -23,7 +23,9 @@ class AddDeck extends React.Component {
             saveDeckTitle(deckName).then(() => {
                 getDecks().then(result => {
                     this.props.addDeck(JSON.parse(result))
-                    this.props.navigation.goBack() 
+		            item = {key: deckName, total:0}
+		            this.props.navigation.navigate('DeckDetail', { item } )
+
                 })
             })
         }

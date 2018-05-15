@@ -12,12 +12,10 @@ class Score extends React.Component {
 			.then(setLocalNotification)
 	}
 
-	goHome = () => {
-		this.props.navigation.dispatch(NavigationActions.reset({
-			index: 0,
-			key: null,
-			actions: [NavigationActions.navigate({ routeName: 'Home' })]
-		}))
+	goDeck = () => {
+		const game = this.props.game
+		item = {key: game.title, total:game.data.length}
+		this.props.navigation.navigate('DeckDetail', { item } )
 	}
 
 	resetQuiz = () => {
@@ -56,7 +54,7 @@ class Score extends React.Component {
 						color="#80B2C9"
 						/>
 
-					<Button title="Início" color="#80B2C9" onPress={() => this.goHome()}/>
+					<Button title="Voltar ao baralho" color="#80B2C9" onPress={() => this.goDeck()}/>
 				</View>
 			</View>
 		);

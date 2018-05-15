@@ -36,6 +36,7 @@ class DeckDetail extends React.Component {
         )
     }
     render() {	
+        
         const { deck } = this.props
         const { item } = this.props.navigation.state.params
         const details = itemDetails(deck, item.key)

@@ -10,15 +10,20 @@ import  { getDecks }  from '../utils/api';
 
 class Decks extends React.Component {
 	state = { result: '' }
+
+	onPressDeckDetail = (item) =>{
+		this.props.navigation.navigate(
+			'DeckDetail',
+			{item: item} 
+		)
+	}
+
 	renderItem = ({ item }) => (
 		<View>
 			<ListItem noBorder
 				title={item.key} 
 				subtitle={`${item.total} cards`} 
-				onPress={() => this.props.navigation.navigate(
-					'DeckDetail',
-					{item: item} 
-				)}
+				onPress={() => this.onPressDeckDetail(item)}
 				rightIcon={{name: 'chevron-right'}}
 			/>
 		</View>
